@@ -1,0 +1,9 @@
+<ion-view view-title="Browse">
+    <ion-content>
+        <ion-list>
+            <ion-item ng-repeat="video in vm.videos" ui-sref="app.watch({ id: video.id })">
+                {{ video.title }}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
