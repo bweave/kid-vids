@@ -3,14 +3,20 @@ angular
   .controller('AppCtrl', [function() {
 
   }])
-  .controller('BrowseCtrl', ['Videos', function(Videos) {
-    var self = this;
+  .controller('BrowseCtrl', ['$scope', 'VideosApi', 'videos', function($scope, VideosApi, videos) {
+    this.videos = videos;
 
-    Videos.all().then(function(videos) {
-      self.videos = videos;
-    });
+    this.doRefresh = function() {
+      VideosApi.all()
+        .then(function(videos) {
+          self.videos = videos;
+        })
+        .finally(function() {
+          $scope.$broadcast('scroll.refreshComplete');
+        });
+    };
   }])
-  .controller('WatchCtrl', ['$sce', 'video', function($sce, video) {
+  .controller('WatchCtrl', ['$sce', 'video', 'ApiUrl', function($sce, video, ApiUrl) {
     this.video = video;
-    this.videoUrl = $sce.trustAsResourceUrl(video.url);
+    this.videoUrl = $sce.trustAsResourceUrl(ApiUrl + video.url);
   }]);

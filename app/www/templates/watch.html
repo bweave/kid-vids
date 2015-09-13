@@ -1,9 +1,10 @@
 <ion-view view-title="Watch">
-    <ion-content>
-      <div class="video-wrap">
-        <video src="{{ vm.videoUrl }}" controls autoplay="true">
-          Uh-oh, looks like your device doesn't support HTML5 Video. Bummer!
-        </video>
+    <ion-content class="padding">
+        <div class="video-wrap">
+            <video controls webkit-playsinline poster="http://images.zap2it.com/assets/p186155_b_h3_aa/whats-new-scooby-doo.jpg">
+              <source src="{{ vm.videoUrl }}" type="video/mp4" />
+              Uh-oh, looks like your device doesn't support HTML5 Video. Bummer!
+            </video>
       </div>
     </ion-content>
 </ion-view>

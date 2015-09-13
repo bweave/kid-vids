@@ -1,7 +1,6 @@
 angular
   .module('kidVids.services', [])
-  .constant('ApiUrl', 'http://localhost:8000')
-  .factory('Videos', ['$http', 'ApiUrl', function($http, ApiUrl) {
+  .factory('VideosApi', ['$http', 'ApiUrl', function($http, ApiUrl) {
     var self = this,
         service = {};
 

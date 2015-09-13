@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\KidVid;
+use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller as BaseController;
 
 class KidVidsController extends BaseController
@@ -32,5 +33,23 @@ class KidVidsController extends BaseController
         }
 
         return response()->json($video);
+    }
+
+    /**
+     * Get the requested Video File
+     * @param  string $fileName
+     * @return Response
+     */
+    public function video($fileName)
+    {
+        $filePath = storage_path().'/app/videos/'.$fileName;
+
+        if (! File::exists($filePath) or (! $mimeType = File::mimeType($filePath))) {
+            return response("File does not exist.", 404);
+        }
+
+        $fileContents = File::get($filePath);
+
+        return response($fileContents, 200, ['Content-Type' => $mimeType]);
     }
 }
